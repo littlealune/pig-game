@@ -1,6 +1,6 @@
 const playerOneScoreBoard = document.getElementById('score--0')
 const playerTwoScoreBoard = document.getElementById('score--1')
-const currentOneScore = document.getElementById('current--1')
+const currentOneScore = document.getElementById('current--0')
 const currentTwoScore = document.getElementById('current--1')
 const newGameButton = document.querySelector('.btn--new')
 const rollDiceButton = document.querySelector('.btn--roll')
@@ -15,7 +15,10 @@ const initPigGame = function () {
   //TODO: fix initPigGame
   playerOneScoreBoard.textContent = 0
   playerTwoScoreBoard.textContent = 0
+  currentOneScore.textContent = 0
+  currentTwoScore.textContent = 0
   currentPlayer = 1
+  currentPlayerScore = 0
   playerOneScoreBoard.classList.add('player--active')
   rollDice
 }
@@ -23,30 +26,25 @@ const rollDice = function () {
   const diceImageArray = ['dice-1.png', 'dice-2.png', 'dice-3.png', 'dice-4.png', 'dice-5.png', 'dice-6.png']
   currentDiceValue = Math.floor((Math.random() * 6) + 1)
   currentDice.src = diceImageArray[(currentDiceValue-1)]
+
+  const currentScoreElement = (currentPlayer === 1 ) ? currentOneScore : currentTwoScore
+
   if(currentDiceValue!=1){
     currentPlayerScore += currentDiceValue
-    currentScoreBoard.textContent = currentPlayerScore
+    currentScoreElement.textContent = currentPlayerScore
   }else{
     changePlayer
   }
 }
 const changePlayer = function(){
-  if (currentPlayer == 1){
-    currentScoreBoard = playerTwoScoreBoard
-    currentPlayer = 2
-    togglePlayer
-  }else{
-    currentScoreBoard = playerTwoScoreBoard
-    currentPlayer = 1
-  }
-  currentPlayerScore = currentScoreBoard.textContent
+  currentPlayer = (currentPlayer === 1) ? 2 : 1
+  currentPlayerScore = 0
   togglePlayer
 }
 
-//TODO: holdScore
-
 const holdScore = function() {
-  currentScoreBoard.textContent += currentPlayerScore
+  const currentScore = Number(currentScoreBoard.textContent)
+  currentScoreBoard.textContent = isNaN() ? currentPlayerScore : currentScore + currentPlayerScore
   currentPlayerScore = 0
   changePlayer
 }
