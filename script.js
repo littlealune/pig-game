@@ -1,5 +1,7 @@
-const playerOneScoreBoard = document.querySelector('#score--0')
-const playerTwoScoreBoard = document.querySelector('#score--1')
+const playerOneScoreBoard = document.getElementById('score--0')
+const playerTwoScoreBoard = document.getElementById('score--1')
+const currentOneScore = document.getElementById('current--1')
+const currentTwoScore = document.getElementById('current--1')
 const newGameButton = document.querySelector('.btn--new')
 const rollDiceButton = document.querySelector('.btn--roll')
 const holdButton = document.querySelector('.btn--hold')
@@ -14,7 +16,7 @@ const initPigGame = function () {
   playerOneScoreBoard.textContent = 0
   playerTwoScoreBoard.textContent = 0
   currentPlayer = 1
-  enablePlayer
+  playerOneScoreBoard.classList.add('player--active')
   rollDice
 }
 const rollDice = function () {
@@ -32,18 +34,39 @@ const changePlayer = function(){
   if (currentPlayer == 1){
     currentScoreBoard = playerTwoScoreBoard
     currentPlayer = 2
+    togglePlayer
   }else{
     currentScoreBoard = playerTwoScoreBoard
     currentPlayer = 1
   }
   currentPlayerScore = currentScoreBoard.textContent
+  togglePlayer
 }
 
+//TODO: holdScore
 
-const enablePlayer = function(){
-  //TODO: add enable player function
+const holdScore = function() {
+  currentScoreBoard.textContent += currentPlayerScore
+  currentPlayerScore = 0
+  changePlayer
 }
+
+const togglePlayer = function(){
+  playerOneScoreBoard.classList.toggle('player--active')
+  playerTwoScoreBoard.classList.toggle('player--active')
+}
+
+/*const selectWinner = function() {
+  if(currentPlayer){
+
+  }
+}*/
+
 
 initPigGame
 
 rollDiceButton.addEventListener('click', rollDice)
+
+newGameButton.addEventListener('click',initPigGame)
+
+holdButton.addEventListener('click', holdScore)
