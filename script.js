@@ -21,6 +21,8 @@ const initPigGame = function () {
   currentPlayerScore = 0
   playerOne.classList.add('player--active')
   playerTwo.classList.remove('player--active')
+  playerOne.classList.remove('player--winner')
+  playerTwo.classList.remove('player--winner')
   rollDice
 }
 const rollDice = function () {
@@ -62,9 +64,7 @@ const togglePlayer = function(){
 }
 
 /*const selectWinner = function() {
-  if(currentPlayer){
-
-  }
+  
 }*/
 
 document.addEventListener('DOMContentLoaded' , initPigGame)
