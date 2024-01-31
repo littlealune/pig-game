@@ -1,5 +1,5 @@
-const playerOne = document.getElementsByClassName('player--0')
-const playerTwo = document.getElementsByClassName('player--1')
+const playerOne = document.querySelector('.player--0')
+const playerTwo = document.querySelector('.player--1')
 const playerOneScoreBoard = document.getElementById('score--0')
 const playerTwoScoreBoard = document.getElementById('score--1')
 const currentOneScore = document.getElementById('current--0')
@@ -23,7 +23,7 @@ const initPigGame = function () {
   playerTwo.classList.remove('player--active')
   playerOne.classList.remove('player--winner')
   playerTwo.classList.remove('player--winner')
-  rollDice
+  rollDice()
 }
 const rollDice = function () {
   const diceImageArray = ['dice-1.png', 'dice-2.png', 'dice-3.png', 'dice-4.png', 'dice-5.png', 'dice-6.png']
@@ -38,13 +38,13 @@ const rollDice = function () {
   }else{
     currentPlayerScore = 0
     currentScoreElement.textContent = currentPlayerScore
-    changePlayer
+    changePlayer()
   }
 }
 const changePlayer = function(){
   currentPlayer = (currentPlayer === 1) ? 2 : 1
   currentPlayerScore = 0
-  togglePlayer
+  togglePlayer()
 }
 
 const holdScore = function() {
@@ -54,7 +54,7 @@ const holdScore = function() {
   if (!isNaN(currentScore)){
     currentScoreElement.textContent = currentScore + currentPlayerScore
     currentPlayerScore = 0
-    changePlayer
+    changePlayer()
   }
 }
 
