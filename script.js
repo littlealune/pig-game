@@ -1,5 +1,7 @@
 const playerOne = document.querySelector('.player--0')
 const playerTwo = document.querySelector('.player--1')
+const namePlayerOne = document.querySelector('#name--0')
+const namePlayerTwo = document.querySelector('#name--1')
 const playerOneScoreBoard = document.getElementById('score--0')
 const playerTwoScoreBoard = document.getElementById('score--1')
 const currentOneScore = document.getElementById('current--0')
@@ -19,6 +21,8 @@ const initPigGame = function () {
   currentTwoScore.textContent = '0'
   currentPlayer = 1
   currentPlayerScore = 0
+  namePlayerOne.textContent = 'Player 1'
+  namePlayerTwo.textContent = 'Player 2'
   playerOne.classList.add('player--active')
   playerTwo.classList.remove('player--active')
   playerOne.classList.remove('player--winner')
@@ -54,7 +58,11 @@ const holdScore = function() {
   if (!isNaN(currentScore)){
     currentScoreElement.textContent = currentScore + currentPlayerScore
     currentPlayerScore = 0
-    changePlayer()
+    if(isWinner(Number(currentScoreElement.textContent))){
+      selectWinner()
+    }else{
+      changePlayer()
+    }
   }
 }
 
@@ -62,10 +70,18 @@ const togglePlayer = function(){
   playerOne.classList.toggle('player--active')
   playerTwo.classList.toggle('player--active')
 }
-
-/*const selectWinner = function() {
-  
-}*/
+const isWinner = function(currentScoreElement)  {
+  return currentScoreElement >= 100
+}
+const selectWinner = function() {
+  if(currentPlayer === 1){
+    playerOne.classList.add('player--winner')
+    namePlayerOne.textContent= 'Winner'
+  }else{
+    playerTwo.classList.add('player--winner')
+    namePlayerTwo.textContent= 'Winner'
+  }
+}
 
 document.addEventListener('DOMContentLoaded' , initPigGame)
 
