@@ -14,7 +14,7 @@ let currentPlayer = 1
 let currentPlayerScore = 0
 
 const initPigGame = function () {
-  //TODO: fix initPigGame
+  //Configure starting variables
   playerOneScoreBoard.textContent = '0'
   playerTwoScoreBoard.textContent = '0'
   currentOneScore.textContent = '0'
@@ -30,6 +30,7 @@ const initPigGame = function () {
   rollDice()
 }
 const rollDice = function () {
+  //generates a random number betweeen 0-5 and selects the corresponding image, and in case it rolls a 1, it sets the sum of poinst to zero
   const diceImageArray = ['dice-1.png', 'dice-2.png', 'dice-3.png', 'dice-4.png', 'dice-5.png', 'dice-6.png']
   const currentDiceValue = Math.floor((Math.random() * 6) + 1)
   currentDice.src = diceImageArray[(currentDiceValue-1)]
@@ -46,12 +47,14 @@ const rollDice = function () {
   }
 }
 const changePlayer = function(){
+  //changes the players
   currentPlayer = (currentPlayer === 1) ? 2 : 1
   currentPlayerScore = 0
   togglePlayer()
 }
 
 const holdScore = function() {
+  //function for the hold score button
   const currentScoreElement = (currentPlayer === 1) ? playerOneScoreBoard : playerTwoScoreBoard
   const currentScore = Number(currentScoreElement.textContent)
 
@@ -67,6 +70,7 @@ const holdScore = function() {
 }
 
 const togglePlayer = function(){
+  //Toggles the "player--active" class on each player
   playerOne.classList.toggle('player--active')
   playerTwo.classList.toggle('player--active')
 }
@@ -74,6 +78,7 @@ const isWinner = function(currentScoreElement)  {
   return currentScoreElement >= 100
 }
 const selectWinner = function() {
+  //adds the class "player-winner" to the player that has reached 100 points or more
   if(currentPlayer === 1){
     playerOne.classList.add('player--winner')
     namePlayerOne.textContent= 'Winner'
@@ -82,6 +87,8 @@ const selectWinner = function() {
     namePlayerTwo.textContent= 'Winner'
   }
 }
+
+//listeners for the buttons
 
 document.addEventListener('DOMContentLoaded' , initPigGame)
 
